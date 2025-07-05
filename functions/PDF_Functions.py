@@ -8,6 +8,7 @@ def extract_text_from_pdf(pdf_path):
         response += text  # write text of page # write page delimiter (form feed 0x0C)
    doc.close()  # close the document
    return response
+   
 
 
 def generate_resume_from_html(html_content):
