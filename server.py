@@ -8,7 +8,7 @@ from flask_cors import CORS
 load_dotenv()
 
 UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER") or r'uploadFolder'
-UI_BASE_URL = os.getenv("UI_BASE_URL") or "http://localhost:3000"
+UI_BASE_URL = os.getenv("UI_BASE_URL") or "https://ai-resume-enhancer-frontend.vercel.app"
 app = Flask(__name__) 
 CORS(app, origins=[UI_BASE_URL], supports_credentials=True)
 
