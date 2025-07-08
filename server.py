@@ -7,13 +7,17 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 load_dotenv()
 
-UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
-UI_BASE_URL = os.getenv("UI_BASE_URL")
-app = Flask(__name__)
+UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER") or r'uploadFolder'
+UI_BASE_URL = os.getenv("UI_BASE_URL") or "http://localhost:3000"
+app = Flask(__name__) 
 CORS(app, origins=[UI_BASE_URL], supports_credentials=True)
 
 @app.route("/upload", methods=[ "POST"])
 def upload_resume():
+
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+
     # CHECK IF THE REQUEST OBJECT HAS FILES AND JOB DESCRIPTION
     if 'resume' not in request.files or request.form.get('job') is None:
         return jsonify({"error": "No file part or job description provided"}), 400
