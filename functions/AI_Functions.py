@@ -39,10 +39,10 @@ def generate_enhanced_resume(job_text, resume_text):
                 "Job Description: {job_text} "
                 "Output only the improved resume in JSON format with the keys as follows: "
                 "name (string), job_role (string), mobile (string), email (string), linkedin (string), github (string), professional_summary (string), key_skills (array of strings), "
-                "experience (array with fields: title (string), company (string), dates (string), description (array of strings)), "
+                "experience (array with fields: title (string), company (string), start_date (string), end_date (string), description (array of strings)), "
                 "projects (array with fields: title (string), description (array of strings), tech_stack (string)), "
-                "education (array with fields: institution (string), degree (string), dates (string), cgpa (string), percentage (string)), "
-                "certifications (array with fields: title (string), date (string), organization (string)). "
+                "education (array with fields: institution (string), degree (string), start_date (string), end_date (string), cgpa (string), percentage (string)), "
+                "certifications (array with fields: title (string), start_date (string), end_date (string), organization (string)). "
                 "hobbies (array of strings), languages (array of strings). "
                 "All these fields must be present in the output JSON. If no data is present for a field, use an empty array or empty string."
             )
