@@ -56,7 +56,7 @@ def upload_resume():
         extracted_resume = extract_text_from_pdf(filepath)
         job_description = request.form.get('job')
         enhanced_resume = generate_enhanced_resume(job_description, extracted_resume)
-        data =  clean_json_output(enhanced_resume), 200
+        data =  clean_json_output(enhanced_resume)
         return success_response_formatter(json.loads(data))
         
 @app.route("/hello", methods=["GET"])
