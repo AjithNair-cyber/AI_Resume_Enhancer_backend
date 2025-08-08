@@ -51,14 +51,14 @@ def upload_resume():
     if file and file.filename.endswith('.pdf'):
 
         # SAVING THE FILE TO THE UPLOAD FOLDER
-        # filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-        # file.save(filepath)
-        # extracted_resume = extract_text_from_pdf(filepath)
-        # job_description = request.form.get('job')
-        # enhanced_resume = generate_enhanced_resume(job_description, extracted_resume)
+        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(filepath)
+        extracted_resume = extract_text_from_pdf(filepath)
+        job_description = request.form.get('job')
+        enhanced_resume = generate_enhanced_resume(job_description, extracted_resume)
         # return clean_json_output(enhanced_resume), 200
 
-        return success_response_formatter(data=return_dummy_data())
+        return success_response_formatter(data=enhanced_resume)
         
 @app.route("/hello", methods=["GET"])
 def hello():
