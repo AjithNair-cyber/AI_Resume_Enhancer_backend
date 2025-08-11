@@ -48,7 +48,8 @@ def generate_jwt(user):
     payload = {
         "email" : user["email"],
         "username" : user["name"],
-        "exp" : expiration_timestamp
+        "exp" : expiration_timestamp,
+        "_id" : str(user["_id"])
     }
 
     encoded_jwt = jwt.encode(payload, SECRET, algorithm="HS256")
