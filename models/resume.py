@@ -18,6 +18,7 @@ class Resume:
         languages: list
     ):
         self.name = name
+        self.user_id = user_id
         self.job_role = job_role
         self.mobile = mobile
         self.email = email
@@ -36,6 +37,7 @@ class Resume:
         return {
             "name": self.name,
             "job_role": self.job_role,
+            "user_id": self.user_id,
             "mobile": self.mobile,
             "email": self.email,
             "linkedin": self.linkedin,

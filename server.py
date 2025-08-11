@@ -27,10 +27,10 @@ def check_auth():
     if(url_path not in PUBLIC_ROUTES):
         token = request.headers.get('Authorization')
         if(token is None):
-            return error_response_formatter(data="Please Send Authorization Token", status=400)
+            return error_response_formatter(data="Please Send Authorization Token", status=401)
         user = decode_jwt(jwt_token=token.replace("Bearer ", ""))
         if(user is False):
-            return error_response_formatter(data="Token Invalid", status=400)
+            return error_response_formatter(data="Token Invalid", status=401)
         else :
             g.user = user
 
@@ -50,14 +50,15 @@ def upload_resume():
         
     if file and file.filename.endswith('.pdf'):
 
-        # SAVING THE FILE TO THE UPLOAD FOLDER
-        filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-        file.save(filepath)
-        extracted_resume = extract_text_from_pdf(filepath)
-        job_description = request.form.get('job')
-        enhanced_resume = generate_enhanced_resume(job_description, extracted_resume)
-        data =  clean_json_output(enhanced_resume)
-        return success_response_formatter(json.loads(data))
+        # # SAVING THE FILE TO THE UPLOAD FOLDER
+        # filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+        # file.save(filepath)
+        # extracted_resume = extract_text_from_pdf(filepath)
+        # job_description = request.form.get('job')
+        # enhanced_resume = generate_enhanced_resume(job_description, extracted_resume)
+        # data =  clean_json_output(enhanced_resume)
+        # return success_response_formatter(json.loads(data))
+        return success_response_formatter(return_dummy_data())
         
 @app.route("/hello", methods=["GET"])
 def hello():
@@ -117,26 +118,33 @@ def login():
 @app.route("/save", methods=["POST"])
 def save_resume():
     body = request.json
+    print(g.user)
     resume = Resume(
-    body["name"],
-    body["job_role"],
-    body["mobile"],
-    body["email"],
-    body["linkedin"],
-    body["github"],
-    body["professional_summary"],
-    body["key_skills"],
-    body["experience"],
-    body["projects"],
-    body["education"],
-    body["certifications"],
-    body["hobbies"],
-    body["languages"])
+    user_id=g.user["_id"],
+    name=body["name"],
+    job_role=body["job_role"],
+    mobile=body["mobile"],
+    email=body["email"],
+    linkedin=body["linkedin"],
+    github=body["github"],
+    professional_summary=body["professional_summary"],
+    key_skills=body["key_skills"],
+    experience=body["experience"],
+    projects=body["projects"],
+    education=body["education"],
+    certifications=body["certifications"],
+    hobbies=body["hobbies"],
+    languages=body["languages"])
 
-    save_resume(resume.get_resume())
+    saveResume(resume.get_resume())
 
     return success_response_formatter("Saved Successfully")
 
+
+@app.route("/resumes", methods=["GET"])
+def get_user_resumes():
+    resumes = getResumes(g.user["_id"])
+    return success_response_formatter(resumes)
 
 
 if __name__ == '__main__':
