@@ -55,5 +55,16 @@ def getResumes(user_id):
     resumes = [serialize_doc(r) for r in resumes]
     return resumes
 
+def editResume(resume_id, resume):
+    enhanced_resumes.update_one(
+        {"_id": ObjectId(resume_id)},
+        {"$set": resume}
+    )
+    return serialize_doc(enhanced_resumes.find_one({"_id": ObjectId(resume_id)}))
+
+def deleteResume(resume_id):
+    enhanced_resumes.delete_one({"_id": ObjectId(resume_id)})
+    return
+
 
 
