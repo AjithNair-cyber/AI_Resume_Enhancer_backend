@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 class Resume:
     def __init__(
         self,
@@ -32,6 +34,7 @@ class Resume:
         self.certifications = certifications
         self.hobbies = hobbies
         self.languages = languages
+        self.created_at = datetime.now(timezone.utc)
 
     def get_resume(self) -> dict:
         return {
@@ -50,4 +53,5 @@ class Resume:
             "certifications": self.certifications,
             "hobbies": self.hobbies,
             "languages": self.languages,
+            "created_at": self.created_at
         }
