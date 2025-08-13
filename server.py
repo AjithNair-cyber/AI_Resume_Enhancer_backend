@@ -118,7 +118,6 @@ def login():
 @app.route("/save", methods=["POST"])
 def save_resume():
     body = request.json
-    print(g.user)
     resume = Resume(
     user_id=g.user["_id"],
     name=body["name"],
@@ -140,6 +139,34 @@ def save_resume():
 
     return success_response_formatter("Saved Successfully")
 
+@app.route("/edit/<resume_id>", methods=["PUT"])
+def edit_resume(resume_id):
+    body = request.json
+    resume = Resume(
+    user_id=g.user["_id"],
+    name=body["name"],
+    job_role=body["job_role"],
+    mobile=body["mobile"],
+    email=body["email"],
+    linkedin=body["linkedin"],
+    github=body["github"],
+    professional_summary=body["professional_summary"],
+    key_skills=body["key_skills"],
+    experience=body["experience"],
+    projects=body["projects"],
+    education=body["education"],
+    certifications=body["certifications"],
+    hobbies=body["hobbies"],
+    languages=body["languages"])
+
+    editResume(resume_id, resume.get_resume())
+
+    return success_response_formatter("Edited Successfully")
+
+@app.route("/delete/<resume_id>", methods=["DELETE"])
+def delete_resume(resume_id):
+    deleteResume(resume_id)
+    return success_response_formatter("Deleted Successfully")
 
 @app.route("/resumes", methods=["GET"])
 def get_user_resumes():
