@@ -2,9 +2,10 @@ from flask import jsonify
 import bcrypt
 import jwt
 import datetime
+import os
 
 
-SECRET = "iPXioyQ67t2anHUEsmdzDCBgv"
+SECRET = os.environ.get("SECRET") or ""
 
 def clean_json_output(text: str) -> str:
     # Remove leading/trailing markdown backticks and 'json'

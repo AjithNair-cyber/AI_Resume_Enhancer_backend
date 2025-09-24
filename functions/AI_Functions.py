@@ -5,7 +5,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 load_dotenv()
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") or "AIzaSyAswb8zCjcotAY9EkfDfpvP_BanFk0ui0c"
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") or ""
 
 LLM = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash",

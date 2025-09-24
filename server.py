@@ -12,7 +12,7 @@ from common.routes import PUBLIC_ROUTES
 load_dotenv()
 
 UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER") or r'uploadFolder'
-UI_BASE_URL = os.getenv("UI_BASE_URL") or "https://ai-resume-enhancer-frontend.vercel.app"
+UI_BASE_URL = os.getenv("UI_BASE_URL") or ""
 app = Flask(__name__) 
 print(UI_BASE_URL)
 CORS(app, origins=[UI_BASE_URL])

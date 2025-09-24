@@ -7,7 +7,7 @@ import json
 load_dotenv()
 
 # Get the MongoDB connection string from environment variables
-CONNECTION_STRING = os.environ.get("CONNECTION_STRING") or "mongodb+srv://resumesuperuser:XbJ11L4FBhGDFuN@ai-backend-mongo-cluster.global.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
+CONNECTION_STRING = os.environ.get("MONGO_URI") or ""
 
 # Create a MongoDB client using the connection string
 client = pymongo.MongoClient(CONNECTION_STRING, serverSelectionTimeoutMS=5000)
