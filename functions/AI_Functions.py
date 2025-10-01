@@ -1,20 +1,31 @@
 import os
 from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_perplexity import ChatPerplexity
 from langchain_core.prompts import ChatPromptTemplate
 
 load_dotenv()
 
-GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY") or ""
+# GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY") or ""
+PPLX_API_KEY = os.getenv("PERPLEXITY_API_KEY") or ""
 
-LLM = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",
-    temperature=0.8,
-    max_tokens=None,
-    timeout=None,
-    max_retries=2,
-    google_api_key=GOOGLE_API_KEY
-)
+# LLM = ChatGoogleGenerativeAI(
+#     model="gemini-2.0-flash",
+#     temperature=0.8,
+#     max_tokens=None,
+#     timeout=None,
+#     max_retries=2,
+#     google_api_key=GOOGLE_API_KEY
+# )
+
+LLM = ChatPerplexity(
+                    temperature=0.5,
+                     pplx_api_key=PPLX_API_KEY,
+                     max_retries=2,
+                     max_tokens=None,
+                     model="sonar"
+                    )
 
 def generate_enhanced_resume(job_text, resume_text):
     prompt_template = ChatPromptTemplate([
